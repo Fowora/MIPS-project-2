@@ -40,3 +40,13 @@ while:
     bge $t2, 5, not_valid
     bge $t3, 1, not_valid
     j check_characters	
+ 
+check_characters:
+	#checks each character
+    beq $s0, 0, converts
+    ble $s0, 47, special_characters
+    ble $s0, 57, integer
+    ble $s0, 85, uppercase
+    ble $s0, 117, lowercase
+    bge $s0, 118, special_characters
+       
