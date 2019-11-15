@@ -49,4 +49,16 @@ check_characters:
     ble $s0, 85, uppercase
     ble $s0, 117, lowercase
     bge $s0, 118, special_characters
-       
+
+special_characters:
+	#checks for special characters
+    addi $t1,$t1, 1
+    beq $s0, 9, space 
+    beq $s0, 32, space
+    beq $s0, 10, converts
+    j not_valid
+    
+space:
+   #checks for spaces
+    addi $t3,$t3, -1
+    j while              
