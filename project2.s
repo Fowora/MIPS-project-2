@@ -73,4 +73,58 @@ integer:
     mul $t3, $t3, $t7
     j while
     
+uppercase:
+	#checks for a specific character type
+    ble $s0, 64, special_characters
+    addi $t1, $t1, 1
+    addi $t2, $t2, 1
+    li $t5, 55
+    sub $s0, $s0, $t5
+    mul $t3, $t3, $t7
+    j while
+
+lowercase:
+	#checks for a specific character type
+    ble $s0, 96, special_characters
+    addi $t1, $t1, 1
+    addi $t2, $t2, 1    
+    li $t5, 87
+    sub $s0, $s0, $t5
+    mul $t3, $t3, $t7
+    j while   
+
+converts:
+	#converts the different character types
+    la $t0, data
+    add $t0,$t0,$t6
+    lb $s0, ($t0)
+    addi $t2,$t2, -1
+    addi $t6, $t6, 1
+    blt $t2,0,done
+    move $t8, $t2
+    j sorts
+                
+sorts:
+	#sorts the different charcater types
+    ble $s0, 57, num
+    ble $s0, 86, upper
+    ble $s0, 118, lower
+
+num:
+	#checks for numbers
+    li $t5, 48
+    sub $s0, $s0, $t5
+    li $t9, 1
+    beq $t2, 0, combine
+    li $t9, 32
+    j exponent
+upper:
+	#checks for uppercase letters
+    li $t5, 55
+    sub $s0, $s0, $t5
+    li $t9, 1
+    beq $t2, 0, combine
+    li $t9, 32
+    j exponent
+    
                                  
