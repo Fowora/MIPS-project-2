@@ -147,6 +147,32 @@ combine:
     add $s1, $s1, $s2
     li $t9, 1
     j converts
+done: jr $ra    
+
+end:
+   #ends the program
+    li $v0, 4
+    la $a0, output
+    syscall
+    li $v0, 1
+    move $a0, $s1
+    syscall
+    j Exit    
+   
+not_valid:
+	#checks for invalid character types
+    li $v0, 4
+    la $a0, output
+    syscall 
+    li $v0, 4
+    la $a0, notvalid
+    syscall
+    j Exit
+
+Exit:
+    li $v0, 10
+    syscall    
+    
    
     
                                  
