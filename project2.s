@@ -126,5 +126,27 @@ upper:
     beq $t2, 0, combine
     li $t9, 32
     j exponent
+lower:
+	#checks for lowercase letters
+    li $t5, 87
+    sub $s0, $s0, $t5
+    li $t9, 1
+    beq $t2, 0, combine
+    li $t9, 32
+    j exponent
+   
+exponent:
+	#multiplies the base by a certain exponent
+    ble $t8, 1, combine
+    mul $t9, $t9, 32
+    addi $t8, $t8, -1
+    j exponent
+combine:
+	#adds the values together
+    mul $s2, $t9, $s0
+    add $s1, $s1, $s2
+    li $t9, 1
+    j converts
+   
     
                                  
