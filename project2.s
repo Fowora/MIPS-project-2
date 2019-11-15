@@ -61,4 +61,16 @@ special_characters:
 space:
    #checks for spaces
     addi $t3,$t3, -1
-    j while              
+    j while 
+ 
+integer:
+	#checks for a specific character type
+    ble $s0, 47, special_characters
+    addi $t1, $t1, 1
+    addi $t2, $t2, 1    
+    li $t5, 48
+    sub $s0, $s0, $t5
+    mul $t3, $t3, $t7
+    j while
+    
+                                 
